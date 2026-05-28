@@ -1,0 +1,144 @@
+name: Fetch and Save JSON Data
+
+on:
+  # اجرای دستی از طریق GitHub UI
+  workflow_dispatch:
+  # اجرای زمانبندی شده هر 6 ساعت (قابل تنظیم)
+  schedule:
+    - cron: '*/30 * * * *'  # هر 30 دقیقه یکبار (برای تست)
+  # اجرا روی هر push به شاخه main (اختیاری)
+  push:
+    branches: [ main ]
+
+jobs:
+  fetch-json:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Set up Go
+      uses: actions/setup-go@v5
+      with:
+        go-version: '1.21'
+        
+    - name: Create Go script
+      run: |
+        cat > fetch_json.go << 'EOF'
+        package main
+        
+        import (
+            "encoding/json"
+            "fmt"
+            "io"
+            "net/http"
+            "os"
+            "path/filepath"
+            "time"
+        )
+        
+        type PriceData struct {
+            Gold18   Item `json:"gold18"`
+            Silver999 Item `json:"silver999"`
+        }
+        
+        type Item struct {
+            Price int `json:"price"`
+            TTL   int `json:"ttl"`
+        }
+        
+        func main() {
+            url := "http://idreams.ir/bus/gold/digigold.php"
+            
+            // تنظیم timeout برای درخواست
+            client := &http.Client{
+                Timeout: 15 * time.Second,
+            }
+            
+            // ایجاد درخواست با هدر مناسب
+            req, err := http.NewRequest("GET", url, nil)
+            if err != nil {
+                fmt.Printf("خطا در ایجاد درخواست: %v\n", err)
+                os.Exit(1)
+            }
+            req.Header.Set("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36")
+            req.Header.Set("Accept", "application/json")
+            
+            // ارسال درخواست
+            resp, err := client.Do(req)
+            if err != nil {
+                fmt.Printf("خطا در ارسال درخواست: %v\n", err)
+                os.Exit(1)
+            }
+            defer resp.Body.Close()
+            
+            // بررسی وضعیت پاسخ
+            if resp.StatusCode != http.StatusOK {
+                fmt.Printf("وضعیت ناموفق: %s\n", resp.Status)
+                os.Exit(1)
+            }
+            
+            // خواندن بدنه پاسخ
+            body, err := io.ReadAll(resp.Body)
+            if err != nil {
+                fmt.Printf("خطا در خواندن بدنه: %v\n", err)
+                os.Exit(1)
+            }
+            
+            // اعتبارسنجی JSON
+            var data PriceData
+            if err := json.Unmarshal(body, &data); err != nil {
+                fmt.Printf("خطا در تجزیه JSON: %v\n", err)
+                os.Exit(1)
+            }
+            
+            // ایجاد نام فایل با timestamp
+            timestamp := time.Now().Format("2006-01-02_15-04-05")
+            filename := fmt.Sprintf("gold_price_%s.json", timestamp)
+            
+            // مسیر پوشه data (در صورت نبود، ایجاد می‌کند)
+            dataDir := "data"
+            if err := os.MkdirAll(dataDir, 0755); err != nil {
+                fmt.Printf("خطا در ایجاد پوشه: %v\n", err)
+                os.Exit(1)
+            }
+            
+            fullPath := filepath.Join(dataDir, filename)
+            
+            // ذخیره JSON در فایل (با indent برای خوانایی بهتر)
+            prettyJSON, err := json.MarshalIndent(data, "", "  ")
+            if err != nil {
+                fmt.Printf("خطا در تبدیل JSON: %v\n", err)
+                os.Exit(1)
+            }
+            
+            if err := os.WriteFile(fullPath, prettyJSON, 0644); err != nil {
+                fmt.Printf("خطا در ذخیره فایل: %v\n", err)
+                os.Exit(1)
+            }
+            
+            // همچنین ذخیره آخرین نسخه به عنوان latest.json
+            latestPath := filepath.Join(dataDir, "latest.json")
+            if err := os.WriteFile(latestPath, prettyJSON, 0644); err != nil {
+                fmt.Printf("خطا در ذخیره latest.json: %v\n", err)
+                os.Exit(1)
+            }
+            
+            fmt.Printf("JSON با موفقیت ذخیره شد:\n")
+            fmt.Printf("- %s\n", fullPath)
+            fmt.Printf("- %s\n", latestPath)
+            fmt.Printf("\nمحتوای ذخیره شده:\n%s\n", string(prettyJSON))
+        }
+        EOF
+        
+    - name: Run Go script
+      run: go run fetch_json.go
+      
+    - name: Commit and push if changed
+      run: |
+        git config --global user.name 'github-actions[bot]'
+        git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+        git add data/
+        git diff --staged --quiet || git commit -m "Auto-update gold prices [skip ci]"
+        git push
