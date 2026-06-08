@@ -53,7 +53,7 @@ jobs:
             
             // تنظیم timeout برای درخواست
             client := &http.Client{
-                Timeout: 15 * time.Second,
+                Timeout: 25 * time.Second,
             }
             
             // ایجاد درخواست با هدر مناسب
