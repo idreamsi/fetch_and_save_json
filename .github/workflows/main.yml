@@ -134,6 +134,7 @@ jobs:
         
     - name: Run Go script
       run: go run fetch_json.go
+      timeout-minutes: 2
       
     - name: Commit and push if changed
       run: |
