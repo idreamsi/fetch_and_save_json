@@ -113,10 +113,10 @@ jobs:
                 os.Exit(1)
             }
             
-            if err := os.WriteFile(fullPath, prettyJSON, 0644); err != nil {
-                fmt.Printf("خطا در ذخیره فایل: %v\n", err)
-                os.Exit(1)
-            }
+            //if err := os.WriteFile(fullPath, prettyJSON, 0644); err != nil {
+            //   fmt.Printf("خطا در ذخیره فایل: %v\n", err)
+            //    os.Exit(1)
+            //}
             
             // همچنین ذخیره آخرین نسخه به عنوان latest.json
             latestPath := filepath.Join(dataDir, "latest.json")
