@@ -49,7 +49,8 @@ jobs:
         }
         
         func main() {
-            url := "http://idreams.ir/bus/gold/digigold.php"
+            //url := "http://idreams.ir/bus/gold/digigold.php"
+            url := "https://api.digikala.com/non-inventory/v1/prices/"
             
             // تنظیم timeout برای درخواست
             client := &http.Client{
@@ -62,8 +63,14 @@ jobs:
                 fmt.Printf("خطا در ایجاد درخواست: %v\n", err)
                 os.Exit(1)
             }
-            req.Header.Set("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36")
-            req.Header.Set("Accept", "application/json")
+            //req.Header.Set("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36")
+            //req.Header.Set("Accept", "application/json")
+              req.Header.Set("User-Agent", "Mozilla/5.0")
+              req.Header.Set("Referer", "https://digikala.com/")
+              req.Header.Set("Origin", "https://digikala.com")
+              req.Header.Set("platform", "webClient")
+              req.Header.Set("Accept", "application/json")
+
             
             // ارسال درخواست
             resp, err := client.Do(req)
