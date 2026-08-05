@@ -1,12 +1,12 @@
 {
-  "update_time": "2026-08-06 00:41:38",
+  "update_time": "2026-08-06 01:52:13",
   "digikala": {
     "gold18": {
-      "price": 185046,
+      "price": 185089,
       "ttl": 60
     },
     "silver999": {
-      "price": 4099,
+      "price": 4102,
       "ttl": 60
     }
   },
@@ -28,8 +28,8 @@
     },
     {
       "price_title": "درهم",
-      "last_price": "50760",
-      "price_change": 0.06
+      "last_price": "50770",
+      "price_change": 0.08
     }
   ],
   "gold_rates": [
