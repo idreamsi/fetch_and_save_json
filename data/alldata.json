@@ -1,8 +1,8 @@
 {
-  "update_time": "2026-08-15 20:20:28",
+  "update_time": "2026-08-15 20:49:42",
   "digikala": {
     "gold18": {
-      "price": 190660,
+      "price": 190604,
       "ttl": 60
     },
     "silver999": {
@@ -13,40 +13,40 @@
   "currency_rates": [
     {
       "price_title": "دلار",
-      "last_price": "186950",
-      "price_change": -0.19
+      "last_price": "187050",
+      "price_change": -0.13
     },
     {
       "price_title": "یورو",
-      "last_price": "216300",
-      "price_change": -0.18
+      "last_price": "216400",
+      "price_change": -0.14
     },
     {
       "price_title": "پوند",
-      "last_price": "250500",
-      "price_change": -0.2
+      "last_price": "250600",
+      "price_change": -0.16
     },
     {
       "price_title": "درهم",
-      "last_price": "50550",
-      "price_change": -0.18
+      "last_price": "50570",
+      "price_change": -0.14
     }
   ],
   "gold_rates": [
     {
       "price_title": "طلای آبشده",
-      "last_price": "82580000",
-      "price_change": -0.35
+      "last_price": "82640000",
+      "price_change": -0.28
     },
     {
       "price_title": "طلای ۱۸ عیار",
-      "last_price": "19063670",
-      "price_change": -0.35
+      "last_price": "19077520",
+      "price_change": -0.28
     },
     {
       "price_title": "طلای ۲۴ عیار",
-      "last_price": "25415685",
-      "price_change": -0.35
+      "last_price": "25434150",
+      "price_change": -0.28
     }
   ]
 }
