@@ -1,12 +1,12 @@
 {
-  "update_time": "2026-08-16 23:03:06",
+  "update_time": "2026-08-16 23:24:54",
   "digikala": {
     "gold18": {
-      "price": 190638,
+      "price": 190584,
       "ttl": 60
     },
     "silver999": {
-      "price": 4166,
+      "price": 4165,
       "ttl": 60
     }
   },
