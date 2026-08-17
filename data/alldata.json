@@ -1,35 +1,35 @@
 {
-  "update_time": "2026-08-17 19:55:38",
+  "update_time": "2026-08-17 20:25:24",
   "digikala": {
     "gold18": {
-      "price": 191704,
+      "price": 191658,
       "ttl": 60
     },
     "silver999": {
-      "price": 4201,
+      "price": 4206,
       "ttl": 60
     }
   },
   "currency_rates": [
     {
       "price_title": "دلار",
-      "last_price": "186500",
-      "price_change": -0.11
+      "last_price": "186700",
+      "price_change": 0
     },
     {
       "price_title": "یورو",
-      "last_price": "216100",
-      "price_change": 0.05
+      "last_price": "216400",
+      "price_change": 0.19
     },
     {
       "price_title": "پوند",
-      "last_price": "250300",
-      "price_change": 0.04
+      "last_price": "250700",
+      "price_change": 0.2
     },
     {
       "price_title": "درهم",
-      "last_price": "50420",
-      "price_change": -0.1
+      "last_price": "50470",
+      "price_change": 0
     }
   ],
   "gold_rates": [
