@@ -1,13 +1,13 @@
 {
-  "update_time": "2026-08-24 04:42:46",
+  "update_time": "2026-08-24 06:08:24",
   "digikala": {
     "gold18": {
-      "price": 218581,
-      "ttl": 60
+      "price": 0,
+      "ttl": 0
     },
     "silver999": {
-      "price": 4825,
-      "ttl": 60
+      "price": 0,
+      "ttl": 0
     }
   },
   "currency_rates": [
