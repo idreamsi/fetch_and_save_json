@@ -1,12 +1,12 @@
 {
-  "update_time": "2026-08-26 04:43:33",
+  "update_time": "2026-08-26 06:10:25",
   "digikala": {
     "gold18": {
-      "price": 217306,
+      "price": 217292,
       "ttl": 60
     },
     "silver999": {
-      "price": 4650,
+      "price": 4701,
       "ttl": 60
     }
   },
@@ -23,8 +23,8 @@
     },
     {
       "price_title": "پوند",
-      "last_price": "272300",
-      "price_change": 0
+      "last_price": "272200",
+      "price_change": -0.04
     },
     {
       "price_title": "درهم",
